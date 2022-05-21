@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BigEnemy : Enemy
 {
+    public static int count = 0;
     protected void Awake()
     {
+        count++;
         hp = 10;
         speed = 1.0f;
         score = 50;

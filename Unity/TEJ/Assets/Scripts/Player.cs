@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private bool canShoot = false;
     private bool isShooting = false;
 
+    private IPlayerInput input { get; set; }
+
 
     private void Awake()
     {
@@ -27,7 +29,11 @@ public class Player : MonoBehaviour
         }
 
         bulletPrefab = Resources.Load<GameObject>("Bullet");
+
+        if(input == null)
+            input = new PlayerInput();
     }
+
 
     void Update()
     {
@@ -36,9 +42,10 @@ public class Player : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        if (Input.GetMouseButtonDown(0))
+
+        if (input.m1_down)
             canShoot = true;
-        else if (Input.GetMouseButtonUp(0))
+        else if (input.m1_up)
             canShoot = false;
 
         if (canShoot)
@@ -62,4 +69,10 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isShooting = false;
     }
+
+}
+
+class PlayerInput : IPlayerInput
+{
+
 }

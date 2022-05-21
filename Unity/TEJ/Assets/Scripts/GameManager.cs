@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     
 
     public static GameManager Instance { get; private set; }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,7 +24,13 @@ public class GameManager : MonoBehaviour
         }
 
         scoreText = GameObject.FindGameObjectWithTag("HUD").GetComponentInChildren<Text>();
-        
+
+        if(Player.Instance.gameObject == null)
+        {
+            Instantiate(Resources.Load<GameObject>("Player"));
+        }
+
+
     }
 
 
@@ -44,6 +51,4 @@ public class GameManager : MonoBehaviour
         scoreText.text = "SCORE: " + score;
 
     }
-
-
 }

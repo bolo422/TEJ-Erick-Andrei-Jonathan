@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour {
 
     void Start()
     {
-        player = Player.Instance.gameObject;
+        if (Player.Instance != null)
+            player = Player.Instance.gameObject;
     }
 
     void Update()
