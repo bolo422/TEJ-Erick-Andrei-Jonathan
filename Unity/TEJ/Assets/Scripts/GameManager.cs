@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private int score;
+    private int score = 0;
+    private Text scoreText;
+    
+    
+
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -16,12 +21,16 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        scoreText = GameObject.FindGameObjectWithTag("HUD").GetComponentInChildren<Text>();
+        
     }
+
 
 
     void Start()
     {
-        
+        scoreText.text = "SCORE: " + score;
     }
 
     void Update()
@@ -29,9 +38,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void addScore(int score)
+    public void addScore(int _score)
     {
-        this.score += score;
+        score += _score;
+        scoreText.text = "SCORE: " + score;
+
     }
 
 

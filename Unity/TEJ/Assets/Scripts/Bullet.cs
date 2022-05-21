@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [HideInInspector]
     public Vector3 direction;
+    [HideInInspector]
     public float speed;
 
     private void Start()
@@ -17,11 +19,14 @@ public class Bullet : MonoBehaviour
            
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        //destruir inimigo (deve dar pontos)
+        if (col.GetComponent<Enemy>() != null)
+            col.GetComponent<Enemy>().TakeDamage(1);
+            
 
         Destroy(gameObject);
-
+      
     }
+
 }
